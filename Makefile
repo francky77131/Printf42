@@ -6,7 +6,7 @@
 #    By: frgojard <frgojard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 10:35:24 by frgojard          #+#    #+#              #
-#    Updated: 2022/06/08 14:12:55 by frgojard         ###   ########.fr        #
+#    Updated: 2022/06/09 12:24:59 by frgojard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,17 @@ CC = gcc -Wall -Werror -Wextra
 
 RM = rm -f
 
-SRC = ft_printf.c \
-
+SRC = main.c \
+		ft_printf.c \
+		ft_putstr.c \
+		ft_putchar.c \
+		ft_putnbr.c \
+		ft_putnbr_hexa.c
+		
 
 OBJ = $(SRC:.c=.o)
 
-all: $(NAME)
+all: $(NAME) test
 		
 .c.o:
 	$(CC) -c $< -o $(<:.c=.o)
@@ -34,6 +39,12 @@ clean:
 
 fclean:	clean
 	$(RM) $(NAME)
+
+test:
+	$(CC) main.c $(NAME)
+
+supa: fclean
+	$(RM) a.out
 
 re: fclean all
 

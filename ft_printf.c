@@ -6,7 +6,7 @@
 /*   By: frgojard <frgojard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 11:38:10 by frgojard          #+#    #+#             */
-/*   Updated: 2022/06/08 17:08:24 by frgojard         ###   ########.fr       */
+/*   Updated: 2022/06/09 12:32:27 by frgojard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ int ft_check_arg(char c, va_list args, int size)
 		size += ft_putchar(va_arg(args, int));
 	if (c == 's')
 		size += ft_putstr(va_arg(args, char *));
+	if (c == 'd' || c == 'i')
+		size += ft_putnbr(va_arg(args, int));
+	if (c == '%')
+		size += ft_putchar('%');
+	if (c == 'x')
+		size += ft_putnbr_hexa(va_arg(args, int), "0123456789abcdef");
+	if (c == 'X')
+		size += ft_putnbr_hexa(va_arg(args, int), "0123456789ABCDEF");
 	return (size);
 }
 
