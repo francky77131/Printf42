@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_p.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frgojard <frgojard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/08 14:44:35 by frgojard          #+#    #+#             */
-/*   Updated: 2022/06/13 17:40:34 by frgojard         ###   ########.fr       */
+/*   Created: 2022/06/13 17:03:19 by frgojard          #+#    #+#             */
+/*   Updated: 2022/06/13 17:37:00 by frgojard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_putchar(char c)
+int	ft_putnbr_p(va_list args, char *base)
 {
-	write(1, &c, 1);
-	return (1);
+	int				i;
+	unsigned long	p;
+
+	i = 0;
+	p = va_arg(args, unsigned long);
+	if ((void *)p == NULL)
+		i += ft_putstr("(nil)");
+	else
+	{
+		i += ft_putstr("0x");
+		i += ft_putnbr_hexa(p, base);
+	}
+	return (i);
 }

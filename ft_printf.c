@@ -6,13 +6,13 @@
 /*   By: frgojard <frgojard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 11:38:10 by frgojard          #+#    #+#             */
-/*   Updated: 2022/06/09 12:32:27 by frgojard         ###   ########.fr       */
+/*   Updated: 2022/06/13 17:41:25 by frgojard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int ft_check_arg(char c, va_list args, int size)
+int	ft_check_arg(char c, va_list args, int size)
 {
 	if (c == 'c')
 		size += ft_putchar(va_arg(args, int));
@@ -20,20 +20,24 @@ int ft_check_arg(char c, va_list args, int size)
 		size += ft_putstr(va_arg(args, char *));
 	if (c == 'd' || c == 'i')
 		size += ft_putnbr(va_arg(args, int));
+	if (c == 'u')
+		size += ft_putnbr_u(va_arg(args, int));
 	if (c == '%')
 		size += ft_putchar('%');
 	if (c == 'x')
-		size += ft_putnbr_hexa(va_arg(args, int), "0123456789abcdef");
+		size += ft_putnbr_hexa(va_arg(args, unsigned int), "0123456789abcdef");
 	if (c == 'X')
-		size += ft_putnbr_hexa(va_arg(args, int), "0123456789ABCDEF");
+		size += ft_putnbr_hexa(va_arg(args, unsigned int), "0123456789ABCDEF");
+	if (c == 'p')
+		size += ft_putnbr_p(args, "0123456789abcdef");
 	return (size);
 }
 
 int	ft_printf(const char *s, ...)
 {
 	va_list	args;
-	int	i;
-	int size;
+	int		i;
+	int		size;
 
 	i = 0;
 	size = 0;
@@ -49,7 +53,6 @@ int	ft_printf(const char *s, ...)
 		}
 		i++;
 	}
-
 	va_end(args);
 	return (size);
 }

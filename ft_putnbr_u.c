@@ -1,19 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frgojard <frgojard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/08 14:44:35 by frgojard          #+#    #+#             */
-/*   Updated: 2022/06/13 17:40:34 by frgojard         ###   ########.fr       */
+/*   Created: 2022/06/13 13:45:08 by frgojard          #+#    #+#             */
+/*   Updated: 2022/06/13 17:37:11 by frgojard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_putchar(char c)
+int	ft_putnbr_u(unsigned int nb)
 {
-	write(1, &c, 1);
-	return (1);
+	long int	nbr;
+	int			i;
+
+	i = 0;
+	nbr = nb;
+	if (nbr < 0)
+	{
+		nbr *= -1;
+		ft_putchar('-');
+		i++;
+	}
+	if (nbr >= 10)
+	{
+		i += ft_putnbr(nbr / 10);
+		i += ft_putnbr(nbr % 10);
+	}
+	if (nbr < 10)
+	{
+		nbr += '0';
+		i += ft_putchar(nbr);
+	}
+	return (i);
 }
